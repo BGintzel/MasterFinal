@@ -1,9 +1,5 @@
 import torch
 import torch.nn as nn
-import utils
-import torchinfo
-from torchinfo import summary
-from euler_circle_generator.euler_circle_lib import plot_circle_simple
 
 
 class NormLayer(nn.Module):

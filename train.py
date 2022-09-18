@@ -4,13 +4,9 @@ import torch.nn as nn
 from tqdm import tqdm
 import numpy as np
 
-from mlhelp import (
-    model_utils,
-    plotting,
-    train,
-    utils,
-    models
-)
+import train
+import utils
+import models
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
