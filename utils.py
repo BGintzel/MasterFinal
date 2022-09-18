@@ -17,6 +17,32 @@ import model_utils
 import models
 
 
+def parse_images_to_input(img1_path, img2_path):
+    image_size = 64
+    imageA = Image.open(img1_path)
+    imageB = Image.open(img2_path)
+    imageA = imageA.resize((image_size, image_size))
+    imageB = imageB.resize((image_size, image_size))
+    imageA = np.asarray(imageA)
+    imageB = np.asarray(imageB)
+    imageA_mean = 0
+    imageB_mean = 0
+    imageA_std = 256
+    imageB_std = 256
+    imageA = (imageA - imageA_mean) / imageA_std
+    imageB = (imageB - imageB_mean) / imageB_std
+
+    print(imageA.shape)
+
+    comp = torch.randn(2, 3, 64, 64, 2).to(DEVICE)
+    # print(input.size())
+    comp[0, :, :, :, 0] = imageA
+    comp[0, :, :, :, 1] = imageB
+
+    comp[1, :, :, :, 0] = imageA
+    comp[1, :, :, :, 1] = imageB
+
+    return comp
 
 
 def set_matplotlib_fontsize(size):

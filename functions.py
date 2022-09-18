@@ -20,3 +20,9 @@ def use_EN(args):
     img1_path = args[3]
     img2_path = args[4]
 
+    input = parse_images_to_input(img1_path, img2_path)
+
+
+
+
+
