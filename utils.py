@@ -16,7 +16,7 @@ from mlhelp import (
     models
 )
 
-PATH = '/home/gintzel/PycharmProjects/pytorchENOpen/'
+
 
 
 def set_matplotlib_fontsize(size):
@@ -64,8 +64,8 @@ def set_device(printing=True):
     DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     if printing:
         print(f"Device is : {DEVICE}")
-    if not os.path.exists(os.path.join(PATH, 'models')):
-        os.makedirs(os.path.join(PATH, 'models'))
+    if not os.path.exists('/models'):
+        os.makedirs(os.path.join('/models'))
     return DEVICE
 
 
@@ -92,31 +92,13 @@ def save_txt(filename, text, text2):
 def make_tensor(int_list):
     return torch.tensor(np.array(int_list, dtype='f'))
 
-model_path = '/home/gintzel/PycharmProjects/pytorchENOpen/models/best__checkpoint.pth'
 
+def load_model(path):
 
-def load_model(type='euler', model=None, optimizer=None):
-    if type == 'euler':
-        path = '/home/gintzel/PycharmProjects/pytorchENOpen/models/best__checkpoint.pth'
-        model = models.Combine()
-        optimizer = torch.optim.Adam(model.parameters(), lr=0.0002, betas=(0.9, 0.9), eps=1e-08, weight_decay=0)
-    elif type == 'euler_19':
-        path = '/home/gintzel/PycharmProjects/ENCircularTraining/models/old/bestcircular_18__checkpoint.pth'
-        model = models.Combine()
-        optimizer = torch.optim.Adam(model.parameters(), lr=0.0002, betas=(0.9, 0.9), eps=1e-08, weight_decay=0)
-    elif type == 'generator':
-        path = '/home/gintzel/PycharmProjects/pytorchENOpen/models/generator_model_generator1__checkpoint.pth'
-        model = models.GeneratorDCGAN(input_size=100)
-        optimizer = torch.optim.Adam(model.parameters(), lr=3e-4, betas=(0.5, 0.9))
-    elif type == 'generatorCircle':
-        path = '/home/gintzel/PycharmProjects/pytorchENOpen/models/generator_model_generator3__checkpoint.pth'
-        model = models.GeneratorSimpleCircles(input_size=100)
-        optimizer = torch.optim.Adam(model.parameters(), lr=3e-4, betas=(0.5, 0.9))
-    else:
-        path = type
-        model = models.Combine()
-        optimizer = torch.optim.Adam(model.parameters(), lr=0.0002, betas=(0.9, 0.9), eps=1e-08, weight_decay=0)
-    global DEVICE
-    DEVICE = set_device()
+    path = path
+    model = models.EN()
+    optimizer = torch.optim.Adam(model.parameters(), lr=0.0002, betas=(0.9, 0.9), eps=1e-08, weight_decay=0)
+
     model, _, _, _ = model_utils.load_model_simple(model, optimizer, path)
+
     return model
