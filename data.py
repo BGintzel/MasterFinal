@@ -1,23 +1,31 @@
+import os
 import numpy as np
 import torch
 from torch.utils.data import TensorDataset, DataLoader
 
 import load_circle_infer as load_data
+import utils
+from euler_circle_generator.euler_circle_gen_duo import create_dataset
+
+dirname = os.path.dirname(__file__)
+data_path = os.path.join(dirname, 'euler_circle_generator/generated_diagram')
 
 
-data_path = '/euler_circle_generator/generated_diagram'
-
-
-def get_dataloaders_reasoning(path):
+def get_dataloaders_reasoning(path=os.path.dirname(__file__), max_num_images=100000, batch_size=32):
     data, labels = [], []
-    if not os.path.exists(path + 'dataset'):
+    path = os.path.join(path, 'datasets')
+    if not os.path.exists(path):
+        if not os.path.exists(data_path):
+            create_dataset()
         data, labels = load_data.load(data_path, max_num_images)
 
         utils.save_file(path + 'dataset', data)
         utils.save_file(path + 'labels', labels)
+        print('datasets created')
     else:
         data = utils.load_file(path + 'dataset')
         labels = utils.load_file(path + 'labels')
+        print('datasets loaded')
     print(type(data))
     print(type(labels))
     # labels = make_one_hot(labels)

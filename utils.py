@@ -16,6 +16,9 @@ import train
 import model_utils
 import models
 
+dirname = os.path.dirname(__file__)
+MODELPATH = os.path.join(dirname, 'models')
+
 
 def parse_images_to_input(img1_path, img2_path):
     image_size = 64
@@ -90,8 +93,8 @@ def set_device(printing=True):
     DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     if printing:
         print(f"Device is : {DEVICE}")
-    if not os.path.exists('/models'):
-        os.makedirs(os.path.join('/models'))
+    if not os.path.exists(MODELPATH):
+        os.makedirs(MODELPATH)
     return DEVICE
 
 

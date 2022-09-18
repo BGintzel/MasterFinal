@@ -9,7 +9,7 @@ def trainer_EN(run, writer, nb_epoch=5, model=None, train_loader=None, valid_loa
 
     device = utils.set_device()
     if not train_loader:
-        train_loader, valid_loader = data.get_dataloaders_reasoning('')
+        train_loader, valid_loader = data.get_dataloaders_reasoning()
     if not model:
         model = models.EN().to(device)
     else:

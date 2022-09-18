@@ -4,9 +4,9 @@ import torch.nn as nn
 from tqdm import tqdm
 import numpy as np
 
+import model_utils
 import train
 import utils
-import models
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
