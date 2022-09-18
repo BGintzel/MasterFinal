@@ -292,8 +292,11 @@ def make_image(experiments, image, value=False, values=None, arc=None, start=-10
     ax.axis('off')
 
     fig.savefig(f'temp.jpg')
+    dirname = os.path.dirname(__file__)
     if value:
-        fig.savefig(f'/home/gintzel/PycharmProjects/pytorchENOpen/img{image}.jpg', dpi=30)
+        dirname = os.path.dirname(__file__)
+        path = os.path.join(dirname, f'img{image}.jpg')
+        fig.savefig(f'{path}', dpi=30)
     plt.close(fig)
     image_return = Image.open(f'temp.jpg')
     image_return = image_return.resize((64, 64))

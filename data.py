@@ -19,12 +19,12 @@ def get_dataloaders_reasoning(path=os.path.dirname(__file__), max_num_images=100
             create_dataset()
         data, labels = load_data.load(data_path, max_num_images)
 
-        utils.save_file(path + 'dataset', data)
-        utils.save_file(path + 'labels', labels)
+        utils.save_file(os.path.join(path, 'dataset'), data)
+        utils.save_file(os.path.join(path, 'labels'), labels)
         print('datasets created')
     else:
-        data = utils.load_file(path + 'dataset')
-        labels = utils.load_file(path + 'labels')
+        data = utils.load_file(os.path.join(path, 'dataset'))
+        labels = utils.load_file(os.path.join(path, 'labels'))
         print('datasets loaded')
     print(type(data))
     print(type(labels))

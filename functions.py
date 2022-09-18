@@ -12,7 +12,7 @@ def run_training(args):
 def use_EN(args):
     device = utils.set_device()
     path = args[2]
-
+    print(path)
     model = utils.load_model(path)
 
     model.to(device)
@@ -22,6 +22,7 @@ def use_EN(args):
 
     input = utils.parse_images_to_input(img1_path, img2_path)
 
+    print(model(input))
 
 
 

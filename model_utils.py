@@ -2,7 +2,7 @@ import os.path
 
 import torch
 # import torchinfo
-PATH = '/home/gintzel/PycharmProjects/pytorchENOpen/'
+PATH = os.path.dirname(__file__)
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
