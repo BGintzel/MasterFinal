@@ -35,15 +35,23 @@ def parse_images_to_input(img1_path, img2_path):
     imageA = (imageA - imageA_mean) / imageA_std
     imageB = (imageB - imageB_mean) / imageB_std
 
-    print(imageA.shape)
 
     comp = torch.randn(2, 3, 64, 64, 2).to(DEVICE)
     # print(input.size())
-    comp[0, :, :, :, 0] = imageA
-    comp[0, :, :, :, 1] = imageB
+    comp[0, :, :, :, 0] = torch.Tensor(imageA).permute(2, 0, 1)
+    comp[0, :, :, :, 1] = torch.Tensor(imageB).permute(2, 0, 1)
 
-    comp[1, :, :, :, 0] = imageA
-    comp[1, :, :, :, 1] = imageB
+    comp[1, :, :, :, 0] = torch.Tensor(imageA).permute(2, 0, 1)
+    comp[1, :, :, :, 1] = torch.Tensor(imageB).permute(2, 0, 1)
+
+    # img1 = comp[0, :, :, :, 0].permute(1, 2, 0).cpu().detach().numpy()
+    # img2 = comp[0, :, :, :, 1].permute(1, 2, 0).cpu().detach().numpy()
+    #
+    # plt.imshow(img1)
+    # plt.show()
+    # #
+    # plt.imshow(img2)
+    # plt.show()
 
     return comp
 
