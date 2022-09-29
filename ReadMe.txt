@@ -34,8 +34,7 @@ Run "main.py check_accuracy models/best01__checkpoint.pth" to test the Accuracy 
 - "check_accuracy" is indicating the checking the accuracy of the EN.
 - relative path to Euler Net
 
-To save time you can download test_datasets and test_labels and put them in the "datasets" folder:
-https://drive.google.com/drive/folders/1TXU-Yv7xTtPhwcaBxFJT_zm2YrUmpP5U?usp=sharing
+Creating a new test data set takes some time (will upload one data set for use soon)
 
 
 RUN ITERATIVE SELF-TRAINING ON AN EN:
