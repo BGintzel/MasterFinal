@@ -22,7 +22,7 @@ https://drive.google.com/drive/folders/1yY3Rbhc3sXVtI51hCvJCA8GJfvBWccBH?usp=sha
 USING OF EN:
 
 Run "main.py use models/best01__checkpoint.pth 1.jpg 2.jpg" to run the EN on two images.
-There are 4 Parameters:
+There are 4 Parameters:check_accuracy
 - "use" is indicating the using the EN.
 - relative path to Euler Net
 - relative path to input image 1
