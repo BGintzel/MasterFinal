@@ -46,12 +46,16 @@ Run "main.py IST models/best01__checkpoint.pth 5" to run iterative self-training
 - number of iterations for self-training
 
 
-FINDING AND PLOTTING UNINTENDED INPUTS (optimized for label [0,1,0,0]:
+FINDING AND PLOTTING UNINTENDED INPUTS (activation maximization optimized for label [0,1,0,0]:
 
-Run "main.py inputs models/best01__checkpoint.pth 1" to find and plot unintended input-output pairs.
-- "inputs" is indicating finding and ploting of unintended input-output pairs.
+Run "main.py find models/best01__checkpoint.pth 1" to find and plot unintended input-output pairs.
+- "find" is indicating finding and ploting of unintended input-output pairs.
 - relative path to Euler Net
-- number of iterations for self-training
+- what kind of input
+    - 1 incomplete
+    - 2 arcs for full green and 180° red/blue
+    - 3 colour
+The results of these experiments are in the folder results
 
 GENERAL REMARKS
 

@@ -90,48 +90,6 @@ def plot_circle(A_center, B_center, A_radius, B_radius, A_color, B_color, filena
     plt.close()
 
 
-def plot_circle_simple(output, A_color, B_color):
-    b_size = output.size()[0]
-    images = np.zeros((b_size, 3, 64, 64))
-    for i, out in enumerate(output):
-        print(i)
-        out = out.cpu().detach().numpy()
-
-        A_center = (out[0].item(), out[1].item())
-        B_center = (out[2].item(), out[3].item())
-        A_radius = out[4].item()
-        B_radius = out[5].item()
-
-        circle1 = plt.Circle(A_center, A_radius, color=A_color, fill=False, linewidth=8)
-        circle2 = plt.Circle(B_center, B_radius, color=B_color, fill=False, linewidth=8)
-
-        fig, ax = plt.subplots(figsize=(8, 8), dpi=100)  # note we must use plt.subplots, not plt.subplot
-
-        canvas = FigureCanvas(fig)
-
-        ax.add_artist(circle1)
-        ax.add_artist(circle2)
-
-        ax.axis('off')
-
-        canvas.draw()
-
-        fig.savefig(f'temp_{i}.jpg')
-        # plt.close()
-        # image_return = Image.open(f'temp_{i}.jpg')
-        # image_return = image_return.resize((64, 64))
-        # image_return = np.asarray(image_return)
-
-        data = np.frombuffer(fig.canvas.tostring_rgb(), dtype=np.uint8).reshape(800, 800, 3)
-        # data = cv2.resize(data, dsize=(64, 64), interpolation=cv2.INTER_AREA)
-        # print(data.shape)
-        # image_return = np.transpose(data, (2, 0, 1))
-        # images[i, :, :, :] = (image_return - 0) / 256
-        plt.close(fig)
-
-    return torch.from_numpy(images)
-
-
 def get_max(out, i):
     if i == 1:
         x = out[0]
@@ -174,7 +132,7 @@ def make_random(tune_for_label, image, len=6):
     else:
         out_check = out
 
-    while not check_img(out_check)== '<' and tune_for_label:
+    while not check_img(out_check) == '<' and tune_for_label:
         out = []
         for i in range(len):
             if i < 4:
@@ -205,44 +163,18 @@ def make_normal(image):
     return np.asarray(out)
 
 
-def make_shifted(image):
-    out = make_normal(image)
-
-    out[0] + np.random.uniform(-0.3, 0.3)
-    out[1] + np.random.uniform(-0.3, 0.3)
-    out[2] + np.random.uniform(-0.3, 0.3)
-    out[3] + np.random.uniform(-0.3, 0.3)
-
-    return np.asarray(out)
-
-
 def make_image(experiments, image, value=False, values=None, arc=None, start=-100, angle=180, colors=False, color=None,
                tune_for_label=True):
-    if value:
-        out = values
-        if image == 1:
-            A_color = 'r'
-        else:
-            A_color = 'b'
+
+    if experiments[3]:
+        out = make_random(tune_for_label, image)
+
+    if image == 1:
+        A_color = 'r'
+
     else:
+        A_color = 'b'
 
-        out = make_normal(image)
-        if experiments[3]:
-            out = make_random(tune_for_label, image)
-        if experiments[4]:
-            out = make_shifted(image)
-
-        if image == 1:
-            A_color = 'r'
-
-            # if experiments[3]:
-            #     while out[4] < out[5]:
-            #         out = make_random()
-        else:
-            A_color = 'b'
-            # if experiments[3]:
-            #     while out[4] > out[5]:
-            #         out = make_random()
     if colors:
         Middle_color = color
     else:
@@ -274,8 +206,6 @@ def make_image(experiments, image, value=False, values=None, arc=None, start=-10
     else:
         circle1 = plt.Circle(A_center, A_radius, color=A_color, fill=False, linewidth=8)
         circle_middle = plt.Circle(Middle_center, Middle_radius, color=Middle_color, fill=False, linewidth=8)
-
-
 
     fig, ax = plt.subplots(figsize=(8, 8), dpi=100)  # note we must use plt.subplots, not plt.subplot
 

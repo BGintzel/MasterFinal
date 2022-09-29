@@ -120,8 +120,8 @@ def save_image(array, name):
     im.save(f"{name}.jpg")
 
 
-def save_txt(filename, text, text2):
-    with open(f'{filename}.txt', 'w') as f:
+def save_txt(path, filename, text, text2):
+    with open(f'{path}{filename}.txt', 'w') as f:
         for i in range(len(text2)):
             f.write(f"Loss: {text[i+1]}  Output:{text2[i].detach().numpy()}\n")
 
