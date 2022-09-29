@@ -41,7 +41,7 @@ def save_model_simple(model, optimizer, epoch, stats, prefix=''):
 
     cp_prefix = getattr(model, 'checkpoint_prefix', '')
     if prefix != '':
-        savepath = os.path.join(models_path, f"{prefix}_{cp_prefix}_checkpoint.pth")
+        savepath = os.path.join(models_path, f"{prefix}{cp_prefix}.pth")
     else:
         savepath = os.path.join(models_path, f"{cp_prefix}_checkpoint_epoch_{epoch + 1}.pth")
 

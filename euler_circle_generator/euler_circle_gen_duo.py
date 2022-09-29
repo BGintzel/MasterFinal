@@ -19,6 +19,7 @@ Relationship for Venn-2:
 4. A does not intersect B ['A','!','B']
 '''
 file_path = 'euler_circle_generator/generated_diagram'
+file_path_test = 'euler_circle_generator/generated_diagram_test'
 
 relational_operator = ['>', '<', '&', '!']
 
@@ -130,3 +131,40 @@ def create_dataset(num_each_class=1250):
 
     # venn2(subsets=(10,10,110),set_labels=('K', 'M'))
 # plt.show()
+
+
+def create_valid_dataset(num_each_class=1250):
+    diag_dict = {}
+    img_counter = 0
+    euler_record = np.zeros((4 * 4 * num_each_class, 4), dtype=np.uint8)
+
+    size = len(relational_operator)*len(relational_operator)*num_each_class
+    counter = 0
+
+    for i in relational_operator:
+        for j in relational_operator:
+            for t in range(num_each_class):
+                counter += 1
+                print(f'Creating dataset {int(counter*100/size)}% done')
+                diag_id = i + j + '_' + str(t)
+                file_prefix = file_path_test + '/' + str(diag_id)
+                op_num_1 = gen_circle(i, file_prefix + '_1.jpg', 'r', 'g')
+                op_num_2 = gen_circle(j, file_prefix + '_2.jpg', 'g', 'b')
+                relations, label = inference(i, j)
+                op_num_3 = np.random.randint(4)
+                op_num_4 = np.random.randint(4)
+                while op_num_3 == op_num_4:
+                    op_num_4 = np.random.randint(3)
+                gen_circle(relational_operator[op_num_3], file_prefix + '_3.jpg', 'r', 'b')
+                gen_circle(relational_operator[op_num_4], file_prefix + '_4.jpg', 'r', 'b')
+                euler_record[img_counter, 0] = op_num_1
+                euler_record[img_counter, 1] = op_num_2
+                euler_record[img_counter, 2] = label[op_num_3]
+                euler_record[img_counter, 3] = label[op_num_4]
+
+                diag_dict[diag_id] = label
+                img_counter += 1
+
+    np.savetxt(file_path_test + '/' + 'euler_record.csv', euler_record.astype(np.uint8), delimiter=',')
+    with open(file_path_test + '/' + 'diag_dict.pickle', 'wb') as fp:
+        pickle.dump(diag_dict, fp)

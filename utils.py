@@ -139,3 +139,7 @@ def load_model(path):
     model, _, _, _ = model_utils.load_model_simple(model, optimizer, path)
 
     return model
+
+
+def equal(tensor1, tensor2):
+    return torch.all(torch.eq(tensor1, tensor2))

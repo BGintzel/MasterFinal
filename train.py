@@ -80,9 +80,9 @@ def train_loop(model, loader, criterion, optimizer, statistics, epoch=1, use_tqd
                 f"Epoch {epoch + 1:>3} Batch {i + 1:>4}/{len(loader)}: "
                 f"Loss {loss.item():>8.5f} Accuracy {acc:>6.2f}%"
             )
-
-        writer.add_scalar(f'TestLoss', loss.item(), global_step=i + batch_size * epoch)
-        writer.add_scalar(f'TestAccuracy', acc, global_step=i + batch_size * epoch)
+        if writer:
+            writer.add_scalar(f'TestLoss', loss.item(), global_step=i + batch_size * epoch)
+            writer.add_scalar(f'TestAccuracy', acc, global_step=i + batch_size * epoch)
 
     return batch_correct_count
 
@@ -122,9 +122,9 @@ def test_loop(model, loader, criterion, statistics, epoch=1, use_tqdm=True, writ
                 f"Epoch {epoch + 1:>3} Batch {i + 1:>4}/{len(loader)}: "
                 f"Loss {loss.item():>8.5f} Accuracy {acc:>6.2f}%"
             )
-
-        writer.add_scalar(f'TestLoss', loss.item(), global_step=i + batch_size * epoch)
-        writer.add_scalar(f'TestAccuracy', acc, global_step=i + batch_size * epoch)
+        if writer:
+            writer.add_scalar(f'TestLoss', loss.item(), global_step=i + batch_size * epoch)
+            writer.add_scalar(f'TestAccuracy', acc, global_step=i + batch_size * epoch)
 
     return batch_correct_count
 
@@ -165,11 +165,12 @@ def train(model, train_loader, test_loader, criterion, optimizer, run='',
         if after_evaluation_hook:
             after_evaluation_hook(epoch=epoch, statistics=statistics)
 
-        writer.add_scalar(f'TestEpochLoss', statistics["test_epoch_losses"][-1], global_step=epoch)
-        writer.add_scalar(f'TestEpochAccuracy', statistics["test_epoch_accuracies"][-1], global_step=epoch)
+        if writer:
+            writer.add_scalar(f'TestEpochLoss', statistics["test_epoch_losses"][-1], global_step=epoch)
+            writer.add_scalar(f'TestEpochAccuracy', statistics["test_epoch_accuracies"][-1], global_step=epoch)
 
-        writer.add_scalar(f'TrainEpochLoss', statistics["train_epoch_losses"][-1], global_step=epoch)
-        writer.add_scalar(f'TrainEpochAccuracy', statistics["train_epoch_accuracies"][-1], global_step=epoch)
+            writer.add_scalar(f'TrainEpochLoss', statistics["train_epoch_losses"][-1], global_step=epoch)
+            writer.add_scalar(f'TrainEpochAccuracy', statistics["train_epoch_accuracies"][-1], global_step=epoch)
 
         print(statistics["test_epoch_accuracies"][-1])
 
