@@ -30,8 +30,8 @@ There are 4 Parameters:
 
 
 TESTING ACCURACY OF EN:
-Run "main.py check_accuracy models/best01__checkpoint.pth" to test the Accuracy of the EN on a newly created Test-Dataset.
-- "check_accuracy" is indicating the checking the accuracy of the EN.
+Run "main.py check models/best01__checkpoint.pth" to test the Accuracy of the EN on a newly created Test-Dataset.
+- "check" is indicating the checking the accuracy of the EN.
 - relative path to Euler Net
 
 To save time you can download test_datasets and test_labels and put them in the "datasets" folder: (maybe still uploading)
