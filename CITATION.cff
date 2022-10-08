@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "Sourcecode of master thesis"
+authors:
+  - family-names: Gintzel
+    given-names: Björn
+title: "Master Thesis Opening the Black Box of Euler Net"
+version: 1.0.0
+date-released: 2022-10-10
+url: "https://github.com/BGintzel/MasterFinal"
