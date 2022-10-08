@@ -38,7 +38,7 @@ def make_new_experiment_arcs(model_path):
 def make_new_experiment_colors(model_path, color=(192/255, 128/255, 192/255)):
     label = np.array([0, 1, 0, 0], dtype='f')
 
-    iterations = 10
+    iterations = 1000
     run = f'color_{label}'
     train_random_circles(model_path=model_path,experiment=[True, True, False, True, False], run=f'color_{label}',
                          iterations=iterations, label=label, colors=True, color=color)
