@@ -1,3 +1,5 @@
+import time
+
 import numpy as np
 import matplotlib.pyplot as plt
 import torch
@@ -57,8 +59,9 @@ def make_image(middle, other, image):
         out[0] = -100
 
     ax.axis('off')
-
     fig.savefig(f'temp.jpg')
+
+
     plt.close(fig)
     image_return = Image.open(f'temp.jpg')
     image_return = image_return.resize((64, 64))

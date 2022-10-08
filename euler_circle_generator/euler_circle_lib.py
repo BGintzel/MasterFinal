@@ -1,4 +1,5 @@
 import math
+import time
 
 import matplotlib.pyplot as plt
 import matplotlib.patches as pplt
@@ -132,7 +133,7 @@ def make_random(tune_for_label, image, len=6):
     else:
         out_check = out
 
-    while not check_img(out_check) == '<' and tune_for_label:
+    while check_img(out_check) == '<' and tune_for_label:
         out = []
         for i in range(len):
             if i < 4:
@@ -220,7 +221,6 @@ def make_image(experiments, image, value=False, values=None, arc=None, start=-10
         out[0] = -1000
 
     ax.axis('off')
-
     fig.savefig(f'temp.jpg')
     dirname = os.path.dirname(__file__)
     if value:
