@@ -35,7 +35,7 @@ def make_new_experiment_arcs(model_path):
     get_overview_arcs(model_path, label1, run)
 
 
-def make_new_experiment_colors(model_path, color='y'):
+def make_new_experiment_colors(model_path, color=(192/255, 128/255, 192/255)):
     label = np.array([0, 1, 0, 0], dtype='f')
 
     iterations = 10

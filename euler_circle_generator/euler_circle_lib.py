@@ -182,7 +182,7 @@ def make_image(experiments, image, value=False, values=None, arc=None, start=-10
         Middle_color = 'g'
 
     if experiments[2]:
-        Middle_color = 'y'
+        Middle_color = (192/255, 128/255, 192/255)
 
     A_center = (out[0], out[1])
     Middle_center = (out[2], out[3])
